@@ -14,6 +14,7 @@ local wsl_colors = {
     background = "#002e0e",
   },
   scrollbar_thumb = '#b6d156',
+  split = '#4a9060',
   ansi = {
     "#000000", -- black
     "#ff5555", -- red
@@ -50,6 +51,7 @@ local ps_colors = {
     background = "#01192e",
   },
   scrollbar_thumb = '#3a9efd',
+  split = '#3a6080',
   ansi = {
     "#0a1628", -- black
     "#5577cc", -- red   → 青紫
@@ -85,6 +87,7 @@ local ssh_colors = {
     background = "#2e0000",
   },
   scrollbar_thumb = '#ff4444',
+  split = '#804040',
   ansi = {
     "#1a0000", -- black
     "#ff5555", -- red
@@ -107,12 +110,33 @@ local ssh_colors = {
   },
 }
 
+-- グラデーション定義
+local wsl_gradient = {
+  orientation = { Linear = { angle = 30.0 } },
+  colors = { '#002e0e', '#00424a', '#002e0e' },
+  interpolation = 'Linear',
+  blend = 'Rgb',
+}
+
+local ps_gradient = {
+  orientation = { Linear = { angle = 30.0 } },
+  colors = { '#01192e', '#0a1a4a', '#01192e' },
+  interpolation = 'Linear',
+  blend = 'Rgb',
+}
+
+local ssh_gradient = {
+  orientation = { Linear = { angle = 30.0 } },
+  colors = { '#2e0000', '#3e1200', '#2e0000' },
+  interpolation = 'Linear',
+  blend = 'Rgb',
+}
+
 function module.apply_to_config(config)
   -- デフォルトは WSL カラーを適用
   config.colors = wsl_colors
+  config.window_background_gradient = wsl_gradient
 
-  -- ドメインで判定（local = Windows/PowerShell、それ以外 = WSL）
-  -- SSH中はシェルから IS_SSH=1 を OSC で通知して検出
   wezterm.on('update-right-status', function(window, pane)
     local domain = (pane:get_domain_name() or '')
     local is_ssh = (pane:get_user_vars().IS_SSH or '0') == '1'
@@ -123,11 +147,11 @@ function module.apply_to_config(config)
     local is_ssh_title = title:find('@ip%-') ~= nil or title:find('@%d+%.%d+') ~= nil
 
     if is_ssh or is_ssh_proc or is_ssh_title then
-      window:set_config_overrides({ colors = ssh_colors })
+      window:set_config_overrides({ colors = ssh_colors, window_background_gradient = ssh_gradient })
     elseif domain == 'local' then
-      window:set_config_overrides({ colors = ps_colors })
+      window:set_config_overrides({ colors = ps_colors, window_background_gradient = ps_gradient })
     else
-      window:set_config_overrides({ colors = wsl_colors })
+      window:set_config_overrides({ colors = wsl_colors, window_background_gradient = wsl_gradient })
     end
   end)
 end
