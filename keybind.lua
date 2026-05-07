@@ -58,6 +58,10 @@ function module.apply_to_config(config)
       end),
     },
 
+    -- 【タブの並べ替え】Ctrl+Shift+Left / Right で左右に移動
+    { key = 'LeftArrow', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(-1) },
+    { key = 'RightArrow', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(1) },
+
     -- 【ペインの移動】Win + h, j, k, l で移動
     { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Left' },
     { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },
