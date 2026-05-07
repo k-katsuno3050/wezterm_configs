@@ -24,6 +24,8 @@ function module.apply_to_config(config)
     brightness = 0.7,
   }
   config.cursor_blink_rate = 0 -- 点滅を止める（111.0のような数値で速度調整も可能）
+  config.show_new_tab_button_in_tab_bar = false -- +ボタンを非表示
+  config.unix_domains = {} -- unix mux ドメインを非表示
 end
 
 return module

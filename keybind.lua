@@ -62,6 +62,15 @@ function module.apply_to_config(config)
     { key = 'LeftArrow', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(-1) },
     { key = 'RightArrow', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(1) },
 
+    -- 【ランチャーを開く】Ctrl+Shift+O でシンプルなランチャーを表示
+    {
+      key = 'O',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.ShowLauncherArgs {
+        flags = 'LAUNCH_MENU_ITEMS|FUZZY',
+      },
+    },
+
     -- 【ペインの移動】Win + h, j, k, l で移動
     { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Left' },
     { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },

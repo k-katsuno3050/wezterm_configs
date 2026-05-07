@@ -116,11 +116,16 @@ function module.apply_to_config(config)
   wezterm.on('update-right-status', function(window, pane)
     local domain = (pane:get_domain_name() or '')
     local is_ssh = (pane:get_user_vars().IS_SSH or '0') == '1'
+    local proc = (pane:get_foreground_process_name() or ''):lower()
+    local title = (pane:get_title() or ''):lower()
+    local is_ssh_proc = proc:find('ssh') ~= nil
+    -- タイトルに「@ip-xx-xx」や「@xxx.xxx.xxx」形式のIPが含まれればSSH判定
+    local is_ssh_title = title:find('@ip%-') ~= nil or title:find('@%d+%.%d+') ~= nil
 
-    if domain == 'local' then
-      window:set_config_overrides({ colors = ps_colors })
-    elseif is_ssh then
+    if is_ssh or is_ssh_proc or is_ssh_title then
       window:set_config_overrides({ colors = ssh_colors })
+    elseif domain == 'local' then
+      window:set_config_overrides({ colors = ps_colors })
     else
       window:set_config_overrides({ colors = wsl_colors })
     end
