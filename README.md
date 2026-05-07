@@ -39,7 +39,7 @@ return index.apply()
 | `Ctrl+Shift+l` | 右のペインに移動 |
 | `Ctrl+Shift+k` | 上のペインに移動 |
 | `Ctrl+Shift+j` | 下のペインに移動 |
-| `Ctrl+Alt+D` | デバッグオーバーレイを表示 |
+| `Ctrl+Shift+Alt+D` | デバッグオーバーレイを表示 |
 
 ## カスタマイズ
 

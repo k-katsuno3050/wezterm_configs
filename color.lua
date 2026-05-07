@@ -4,7 +4,6 @@ local module = {}
 -- WSL / デフォルト用カラー
 local wsl_colors = {
   foreground    = "#ffffff",
-  -- background    = "#002e0e",
   background    = "#002e0e",
   cursor_bg     = "#c1d284",
   cursor_fg     = "#1a1a1a",
@@ -72,15 +71,55 @@ local ps_colors = {
   },
 }
 
+-- SSH 用カラー（赤系統一）
+local ssh_colors = {
+  foreground    = "#ffffff",
+  background    = "#2e0000",
+  cursor_bg     = "#ff8080",
+  cursor_fg     = "#2e0000",
+  cursor_border = "#ff8080",
+  selection_fg  = "#2e0000",
+  selection_bg  = "#ff4444",
+  tab_bar = {
+    background = "#2e0000",
+  },
+  scrollbar_thumb = '#ff4444',
+  ansi = {
+    "#1a0000", -- black
+    "#ff5555", -- red
+    "#ff8866", -- green → オレンジ赤
+    "#ffaa88", -- yellow → サーモン
+    "#cc3333", -- blue → 深紅
+    "#ff6677", -- magenta → ピンク赤
+    "#ff9988", -- cyan → 薄オレンジ
+    "#e8c0c0", -- white → 薄ピンク白
+  },
+  brights = {
+    "#4d1010", -- bright black
+    "#ff7777", -- bright red
+    "#ffaa88", -- bright green
+    "#ffc4a8", -- bright yellow
+    "#ee5555", -- bright blue
+    "#ff88aa", -- bright magenta
+    "#ffbbaa", -- bright cyan
+    "#ffe8e8", -- bright white
+  },
+}
+
 function module.apply_to_config(config)
   -- デフォルトは WSL カラーを適用
   config.colors = wsl_colors
 
   -- ドメインで判定（local = Windows/PowerShell、それ以外 = WSL）
+  -- SSH中はシェルから IS_SSH=1 を OSC で通知して検出
   wezterm.on('update-right-status', function(window, pane)
     local domain = (pane:get_domain_name() or '')
+    local is_ssh = (pane:get_user_vars().IS_SSH or '0') == '1'
+
     if domain == 'local' then
       window:set_config_overrides({ colors = ps_colors })
+    elseif is_ssh then
+      window:set_config_overrides({ colors = ssh_colors })
     else
       window:set_config_overrides({ colors = wsl_colors })
     end

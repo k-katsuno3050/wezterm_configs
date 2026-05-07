@@ -55,7 +55,7 @@ function module.apply_to_config(config)
     -- 【デバッグオーバーレイを表示】開発者向けの情報を表示
     {
       key = 'D',
-      mods = 'CTRL|ALT',
+      mods = 'CTRL|SHIFT|ALT',
       action = wezterm.action.ShowDebugOverlay,
     },
   }
