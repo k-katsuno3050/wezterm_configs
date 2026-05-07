@@ -3,11 +3,15 @@ local module = {}
 
 function module.apply_to_config(config)
   config.keys = {
+    -- 【クリップボード】
+    { key = 'V',      mods = 'CTRL|SHIFT', action = wezterm.action.PasteFrom 'Clipboard' },
+    { key = 'Insert', mods = 'SHIFT',      action = wezterm.action.PasteFrom 'Clipboard' },
+
     -- 【タブ操作】
     { key = 'W', mods = 'CTRL|SHIFT', action = wezterm.action.CloseCurrentTab { confirm = false } },
     { key = 'P', mods = 'CTRL|SHIFT', action = wezterm.action.SpawnCommandInNewTab { args = { 'powershell.exe' }, domain = { DomainName = 'local' } } },
     { key = 'S', mods = 'CTRL|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
-    { key = 'V', mods = 'CTRL|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
+    { key = 'B', mods = 'CTRL|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
 
     -- 【タブのリネーム】
     {
