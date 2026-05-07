@@ -20,12 +20,23 @@ function module.apply_to_config(config)
       },
     },
 
-    -- 【新しいWSLタブを開く】
+    -- 【新しいWSLタブを開く（アアクティブなディレクトリを引き継ぐ）】
+    {
+      key = 'C',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.SpawnCommandInNewTab {
+        domain = { DomainName = 'WSL:Ubuntu-22.04' },
+      },
+    },
+
+    -- 【新しいWSLタブをホームディレクトリで開く】
     {
       key = 'N',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.SpawnCommandInNewTab {
-        domain = { DomainName = 'WSL:Ubuntu-22.04' }, -- あなたの環境のドメイン名
+        domain = { DomainName = 'WSL:Ubuntu-22.04' },
+        -- cd でホームへ移動してから exec でログインシェルに置き換える
+        args = { 'zsh', '-c', 'cd && exec zsh --login' },
       },
     },
 
