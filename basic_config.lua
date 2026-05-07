@@ -11,7 +11,7 @@ function module.apply_to_config(config)
   config.tab_bar_at_bottom = true
   config.font_size = 11.0
   config.font = wezterm.font_with_fallback {
-    'JetBrains Mono',      -- 英数字用
+    'JetBrainsMono NF',    -- 英数字用（Nerd Font対応）
     'BIZ UDゴシック',
     'Noto Sans JP',        -- もしインストールしていれば
     'Meiryo',             -- 日本語用（Windows標準）

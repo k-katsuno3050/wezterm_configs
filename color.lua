@@ -120,14 +120,14 @@ local wsl_gradient = {
 
 local ps_gradient = {
   orientation = { Linear = { angle = 30.0 } },
-  colors = { '#01192e', '#0a1a4a', '#01192e' },
+  colors = { '#01192e', '#28115d', '#01192e' },
   interpolation = 'Linear',
   blend = 'Rgb',
 }
 
 local ssh_gradient = {
   orientation = { Linear = { angle = 30.0 } },
-  colors = { '#2e0000', '#3e1200', '#2e0000' },
+  colors = { '#2e0000', '#54270a', '#2e0000' },
   interpolation = 'Linear',
   blend = 'Rgb',
 }
