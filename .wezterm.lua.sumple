@@ -1,0 +1,3 @@
+-- このファイルを windows の %USERPROFILE%\.wezterm.lua にコピーしてください
+local index = require 'wezterm.index'
+return index.apply()
