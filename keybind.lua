@@ -4,6 +4,7 @@ local module = {}
 function module.apply_to_config(config)
   config.keys = {
     -- 【タブ操作】
+    { key = 'W', mods = 'CTRL|SHIFT', action = wezterm.action.CloseCurrentTab { confirm = false } },
     { key = 'P', mods = 'CTRL|SHIFT', action = wezterm.action.SpawnCommandInNewTab { args = { 'powershell.exe' }, domain = { DomainName = 'local' } } },
     { key = 'H', mods = 'CTRL|SHIFT', action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' } },
     { key = 'V', mods = 'CTRL|SHIFT', action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' } },
@@ -20,7 +21,7 @@ function module.apply_to_config(config)
       },
     },
 
-    -- 【新しいWSLタブを開く（アアクティブなディレクトリを引き継ぐ）】
+    -- 【新しいWSLタブを開く（アクティブなディレクトリを引き継ぐ）】
     {
       key = 'C',
       mods = 'CTRL|SHIFT',

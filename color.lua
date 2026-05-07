@@ -25,7 +25,8 @@ local wsl_colors = {
     "#bfbfbf", -- white
   },
   brights = {
-    "#4d4d4d", -- bright black
+    -- "#4d4d4d", -- bright black
+    "#a1a1a1", -- bright black
     "#ff6e67", -- bright red
     "#55e284", -- bright green
     "#f4f99d", -- bright yellow
