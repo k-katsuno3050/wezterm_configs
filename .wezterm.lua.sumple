@@ -1,3 +1,11 @@
 -- このファイルを windows の %USERPROFILE%\.wezterm.lua にコピーしてください
+
+local home = os.getenv('USERPROFILE')
+package.path = package.path
+  .. ';' .. home .. '\\?.lua'
+  .. ';' .. home .. '\\?\\init.lua'
+  .. ';' .. home .. '\\wezterm\\?.lua'
+  .. ';' .. home .. '\\wezterm\\?\\init.lua'
+
 local index = require 'wezterm.index'
 return index.apply()
