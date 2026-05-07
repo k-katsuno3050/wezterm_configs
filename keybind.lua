@@ -71,6 +71,48 @@ function module.apply_to_config(config)
       },
     },
 
+    -- 【プロジェクトランチャー】Ctrl+Shift+G でプロジェクトを選択してタブを開く
+    {
+      key = 'G',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action_callback(function(window, pane)
+        local projects = {
+          { id = 'home',         cwd = '~' },
+          { id = 'ANEGO/Front',  cwd = '~/top/crm/frontend' },
+          { id = 'Aqpina',       cwd = '~/top/aws_aqpina/code/back/laravel' },
+          { id = 'トップ名古屋', cwd = '~/top/aws_top-nagoya/code/back/laravel' },
+          { id = '履歴書/Front', cwd = '~/top/recruit_form/code/front/react' },
+          { id = '履歴書/Back',  cwd = '~/top/recruit_form/code/back/laravel' },
+          { id = 'でんき',       cwd = '~/top/denki' },
+        }
+        local choices = {}
+        for _, p in ipairs(projects) do
+          table.insert(choices, { label = p.id, id = p.id })
+        end
+        window:perform_action(
+          wezterm.action.InputSelector {
+            title = 'プロジェクトを選択',
+            choices = choices,
+            fuzzy = true,
+            action = wezterm.action_callback(function(win, _, id, _)
+              if not id then return end
+              for _, p in ipairs(projects) do
+                if p.id == id then
+                  local tab, _, _ = win:mux_window():spawn_tab {
+                    args = { 'zsh', '-c', 'cd ' .. p.cwd .. ' && exec zsh --login' },
+                    domain = { DomainName = 'WSL:Ubuntu-22.04' },
+                  }
+                  tab:set_title(p.id)
+                  break
+                end
+              end
+            end),
+          },
+          pane
+        )
+      end),
+    },
+
     -- 【ペインの移動】Win + h, j, k, l で移動
     { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Left' },
     { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },
