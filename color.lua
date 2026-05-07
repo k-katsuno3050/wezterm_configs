@@ -1,30 +1,20 @@
 local wezterm = require 'wezterm'
 local module = {}
 
-function module.apply_to_config(config)
-  -- config.color_scheme = 'Catppuccin Macchiato'
-  
-  config.colors = {
-  -- 1. 基本の背景と文字
-  foreground    = "#ffffff", -- 全体の文字色
-  background    = "#002e0e", -- 全体の背景色
-  cursor_bg     = "#c1d284", -- カーソルの色
-  cursor_fg     = "#1a1a1a", -- カーソルが重なった時の文字色
-  cursor_border = "#c1d284", -- カーソルの枠線
-
-  -- 2. 選択範囲（マウスでなぞった時）
-  selection_fg = "#1a1a1a",    -- noneにすると元の文字色を維持
-  selection_bg = "#b6d156", 
-
-  -- 3. タブバー全体の背景（タブがない余白部分）
+-- WSL / デフォルト用カラー
+local wsl_colors = {
+  foreground    = "#ffffff",
+  -- background    = "#002e0e",
+  background    = "#002e0e",
+  cursor_bg     = "#c1d284",
+  cursor_fg     = "#1a1a1a",
+  cursor_border = "#c1d284",
+  selection_fg  = "#1a1a1a",
+  selection_bg  = "#b6d156",
   tab_bar = {
     background = "#002e0e",
   },
-
   scrollbar_thumb = '#b6d156',
-
-  -- 4. ANSIカラー（ターミナル内の標準的な8色+明るい8色）
-  -- lsコマンドやディレクトリ、プログラムの出力色に影響します
   ansi = {
     "#000000", -- black
     "#ff5555", -- red
@@ -46,6 +36,55 @@ function module.apply_to_config(config)
     "#e6e6e6", -- bright white
   },
 }
+
+-- PowerShell 用カラー（青系統一）
+local ps_colors = {
+  foreground    = "#cce4ff",
+  background    = "#01192e",
+  cursor_bg     = "#7ec8ff",
+  cursor_fg     = "#01192e",
+  cursor_border = "#7ec8ff",
+  selection_fg  = "#01192e",
+  selection_bg  = "#3a9efd",
+  tab_bar = {
+    background = "#01192e",
+  },
+  scrollbar_thumb = '#3a9efd',
+  ansi = {
+    "#0a1628", -- black
+    "#5577cc", -- red   → 青紫
+    "#4da6ff", -- green → 水色
+    "#89c4ff", -- yellow → 薄青
+    "#1565c0", -- blue  → 濃紺
+    "#5b9bd5", -- magenta → スチールブルー
+    "#7ec8ff", -- cyan  → 明るい水色
+    "#a8c8e8", -- white → 薄青白
+  },
+  brights = {
+    "#1e3a5f", -- bright black
+    "#7799ee", -- bright red   → 青紫明
+    "#66bbff", -- bright green → 明水色
+    "#aad4ff", -- bright yellow → より薄い青
+    "#3b78ff", -- bright blue  → 鮮やか青
+    "#80b3e0", -- bright magenta → 明スチール
+    "#b3e0ff", -- bright cyan  → 淡水色
+    "#dceeff", -- bright white → ほぼ白青
+  },
+}
+
+function module.apply_to_config(config)
+  -- デフォルトは WSL カラーを適用
+  config.colors = wsl_colors
+
+  -- ドメインで判定（local = Windows/PowerShell、それ以外 = WSL）
+  wezterm.on('update-right-status', function(window, pane)
+    local domain = (pane:get_domain_name() or '')
+    if domain == 'local' then
+      window:set_config_overrides({ colors = ps_colors })
+    else
+      window:set_config_overrides({ colors = wsl_colors })
+    end
+  end)
 end
 
 return module
