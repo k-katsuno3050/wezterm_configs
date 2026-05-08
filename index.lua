@@ -12,6 +12,7 @@ function index.apply()
     require('launcher').apply_to_config(config)
     require('mousebind').apply_to_config(config)
     require('tab').apply_to_config(config)
+    require('notify').apply_to_config(config)
 
     return config
 end
