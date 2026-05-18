@@ -4,7 +4,10 @@ local module = {}
 function module.apply_to_config(config)
   wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
     local title = tab.tab_title
-    if not title or #title == 0 then title = tab.active_pane.title end
+    if not title or #title == 0 then
+      title = tab.active_pane.title
+    end
+    title = ' ' .. title .. ' '
 
     local limit = config.tab_max_width - 3
     if #title > limit then
