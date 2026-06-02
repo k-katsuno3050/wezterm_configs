@@ -20,8 +20,8 @@ function module.apply_to_config(config)
 
   config.use_ime = true
   config.inactive_pane_hsb = {            -- 操作していない側の画面を少し暗くして集中
-    saturation = 0.9,
-    brightness = 0.7,
+    saturation = 0.8,
+    brightness = 0.4,
   }
   config.cursor_blink_rate = 0 -- 点滅を止める（111.0のような数値で速度調整も可能）
   config.show_new_tab_button_in_tab_bar = false -- +ボタンを非表示

@@ -20,7 +20,7 @@ local wsl_colors = {
     "#ff5555", -- red
     "#50fa7b", -- green
     "#f1fa8c", -- yellow
-    "#422ff0", -- blue
+    "#aca3ff", -- blue
     "#ff79c6", -- magenta
     "#8be9fd", -- cyan
     "#bfbfbf", -- white

@@ -81,7 +81,6 @@ function module.apply_to_config(config)
       mods = 'CTRL|SHIFT',
       action = wezterm.action_callback(function(window, pane)
         local projects = {
-          { id = 'home',         cwd = '~' },
           { id = 'ANEGO/Front',  cwd = '~/top/crm/frontend' },
           { id = 'Aqpina',       cwd = '~/top/aws_aqpina/code/back/laravel' },
           { id = 'トップ名古屋', cwd = '~/top/aws_top-nagoya/code/back/laravel' },
@@ -117,7 +116,7 @@ function module.apply_to_config(config)
       end),
     },
 
-    -- 【ペインの移動】Win + h, j, k, l で移動
+    -- 【ペインの移動】CTRL|SHIFT + h, j, k, l で移動
     { key = 'h', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Left' },
     { key = 'l', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Right' },
     { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Up' },
