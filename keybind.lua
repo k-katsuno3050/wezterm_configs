@@ -1,6 +1,17 @@
 local wezterm = require 'wezterm'
 local module = {}
 
+-- タブタイトルの末尾 (N) をインクリメント、なければ (1) を付加
+local function next_tab_title(window)
+  local title = window:active_tab():get_title()
+  local base, n = title:match('^(.-)%s*%((%d+)%)$')
+  if base and n then
+    return base .. ' (' .. (tonumber(n) + 1) .. ')'
+  else
+    return title .. ' (1)'
+  end
+end
+
 function module.apply_to_config(config)
   config.keys = {
     -- 【クリップボード】
@@ -29,9 +40,16 @@ function module.apply_to_config(config)
     {
       key = 'C',
       mods = 'CTRL|SHIFT',
-      action = wezterm.action.SpawnCommandInNewTab {
-        domain = { DomainName = 'WSL:Ubuntu-22.04' },
-      },
+      action = wezterm.action_callback(function(window, pane)
+        local title = next_tab_title(window)
+        local cwd_uri = pane:get_current_working_dir()
+        local cwd = cwd_uri and cwd_uri.file_path or nil
+        local tab, _, _ = window:mux_window():spawn_tab {
+          domain = { DomainName = 'WSL:Ubuntu-22.04' },
+          cwd = cwd,
+        }
+        tab:set_title(title)
+      end),
     },
 
     -- 【新しいWSLタブをホームディレクトリで開く】
@@ -50,6 +68,7 @@ function module.apply_to_config(config)
       key = 'D',
       mods = 'CTRL|SHIFT',
       action = wezterm.action_callback(function(window, pane)
+        local title = next_tab_title(window)
         local cwd = ""
         local cwd_uri = pane:get_current_working_dir()
         if cwd_uri then cwd = cwd_uri.file_path end
@@ -57,6 +76,7 @@ function module.apply_to_config(config)
 
         -- 左側に1つ、右側に上下2つのレイアウトを作成
         local tab, left_pane, window = window:mux_window():spawn_tab { cwd = cwd, domain = { DomainName = domain } }
+        tab:set_title(title)
         local right_pane_top = left_pane:split { direction = 'Right', cwd = cwd, domain = { DomainName = domain }, size = 0.5 }
         right_pane_top:split { direction = 'Bottom', cwd = cwd, domain = { DomainName = domain }, size = 0.5 }
       end),
