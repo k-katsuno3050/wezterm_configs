@@ -110,6 +110,7 @@ function module.apply_to_config(config)
           { id = '履歴書/Front', cwd = '~/top/recruit_form/code/front/react' },
           { id = '履歴書/Back',  cwd = '~/top/recruit_form/code/back/laravel' },
           { id = 'でんき',       cwd = '~/top/denki' },
+          { id = 'NVIM',        cwd = '~/.config/nvim' },
         }
         local choices = {}
         for _, p in ipairs(projects) do
