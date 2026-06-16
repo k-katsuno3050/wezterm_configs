@@ -79,7 +79,7 @@ function module.apply_to_config(config)
         tab:set_title(title)
         local right_pane_top = left_pane:split { direction = 'Right', cwd = cwd, domain = { DomainName = domain }, size = 0.5 }
         right_pane_top:split { direction = 'Bottom', cwd = cwd, domain = { DomainName = domain }, size = 0.5 }
-        
+
         -- 分割完了後に右上のペインにカーソルを移動
         right_pane_top:activate()
       end),
@@ -111,6 +111,7 @@ function module.apply_to_config(config)
           { id = '履歴書/Back',  cwd = '~/top/recruit_form/code/back/laravel' },
           { id = 'でんき',       cwd = '~/top/denki' },
           { id = 'NVIM',        cwd = '~/.config/nvim' },
+          { id = 'Download',        cwd = '/mnt/c/Users/k-katsuno3050/Downloads' },
         }
         local choices = {}
         for _, p in ipairs(projects) do
