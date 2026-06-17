@@ -105,6 +105,7 @@ function module.apply_to_config(config)
       action = wezterm.action_callback(function(window, pane)
         local projects = {
           { id = 'ANEGO/Front',  cwd = '~/top/crm/frontend' },
+          { id = 'ANEGO/Back',  cwd = '~/top/crm/backend' },
           { id = 'Aqpina',       cwd = '~/top/aws_aqpina/code/back/laravel' },
           { id = 'トップ名古屋', cwd = '~/top/aws_top-nagoya/code/back/laravel' },
           { id = '履歴書/Front', cwd = '~/top/recruit_form/code/front/react' },
