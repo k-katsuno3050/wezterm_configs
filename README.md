@@ -31,6 +31,7 @@ return index.apply()
 | キー | 動作 |
 |---|---|
 | `Ctrl+Shift+P` | 新しいタブで PowerShell を開く |
+| `Ctrl+Shift+F` | 現在のペインのスクロールバックを検索する |
 | `Ctrl+Shift+H` | ペインを水平分割（左右） |
 | `Ctrl+Shift+V` | ペインを垂直分割（上下） |
 | `Ctrl+Shift+R` | 現在のタブをリネームする |

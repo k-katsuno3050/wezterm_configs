@@ -29,6 +29,9 @@ function module.apply_to_config(config)
     { key = 'V',      mods = 'CTRL|SHIFT', action = wezterm.action.PasteFrom 'Clipboard' },
     { key = 'Insert', mods = 'SHIFT',      action = wezterm.action.PasteFrom 'Clipboard' },
 
+    -- 【スクロールバック検索】選択中の文字列、または空の検索欄で検索を開始
+    { key = 'F', mods = 'CTRL|SHIFT', action = wezterm.action.Search 'CurrentSelectionOrEmptyString' },
+
     -- 【タブ操作】
     { key = 'W', mods = 'CTRL|SHIFT', action = wezterm.action.CloseCurrentTab { confirm = false } },
     { key = 'P', mods = 'CTRL|SHIFT', action = wezterm.action.SpawnCommandInNewTab { args = { 'powershell.exe' }, domain = { DomainName = 'local' } } },
@@ -138,8 +141,8 @@ function module.apply_to_config(config)
           { id = 'recruit_form/Front', cwd = '~/top/recruit_form/code/front/react' },
           { id = 'recruit_form/Back',  cwd = '~/top/recruit_form/code/back/laravel' },
           { id = 'denki',       cwd = '~/top/denki' },
-          { id = 'TMS',       cwd = '~/top/tms/code ' },
-          { id = 'meibo',       cwd = '~/top/meibo/code/meibo ' },
+          { id = 'TMS',       cwd = '~/top/tms/code' },
+          { id = 'meibo',       cwd = '~/top/meibo/code/meibo' },
           { id = 'NVIM',        cwd = '~/.config/nvim' },
           { id = 'Download',        cwd = '/mnt/c/Users/k-katsuno3050/Downloads' },
           { id = 'temp',        cwd = '~/temp' },
