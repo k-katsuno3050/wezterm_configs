@@ -18,6 +18,9 @@ function module.apply_to_config(config)
     if not title or #title == 0 then
       title = tab.active_pane.title
     end
+    if tab.active_pane.is_zoomed then
+      title = '[ZOOM] ' .. title
+    end
     if waiting then
       title = '! ' .. title
     end

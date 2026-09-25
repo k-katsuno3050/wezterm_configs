@@ -164,6 +164,9 @@ function module.apply_to_config(config)
     { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Up' },
     { key = 'j', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Down' },
 
+    -- 【ペインの最大化】現在のペインを最大化、または元の分割表示に戻す
+    { key = 'Z', mods = 'CTRL|SHIFT', action = wezterm.action.TogglePaneZoomState },
+
     -- 【デバッグオーバーレイを表示】開発者向けの情報を表示
     {
       key = 'D',
