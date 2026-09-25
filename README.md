@@ -36,6 +36,9 @@ return index.apply()
 | `Ctrl+Shift+R` | 現在のタブをリネームする |
 | `Ctrl+Shift+N` | 新しいタブで WSL (Ubuntu-22.04) を開く |
 | `Ctrl+Shift+D` | WSL の3ペイン分割プリセット（左1・右上下2） |
+| `Ctrl+Shift+O` | ランチャーを開き、既存の workspace を選択する |
+| `Ctrl+Shift+G` | プロジェクトを選び、現在の workspace にタブを開く |
+| `Ctrl+Shift+Alt+R` | 現在の workspace 名を変更する |
 | `Ctrl+Shift+h` | 左のペインに移動 |
 | `Ctrl+Shift+l` | 右のペインに移動 |
 | `Ctrl+Shift+k` | 上のペインに移動 |
@@ -46,6 +49,14 @@ return index.apply()
 | `Ctrl+Shift+Alt+D` | デバッグオーバーレイを表示 |
 
 ペイン最大化中はタブタイトルの先頭に `[ZOOM]` が表示されます。隠れている他のペインは終了せず、バックグラウンドで動作を続けます。
+
+## Workspace
+
+`Ctrl+Shift+G` でプロジェクトを選ぶと、現在の workspace 内に対象ディレクトリの WSL タブを作成します。workspace の切り替えは行いません。
+
+現在の workspace 名は `Ctrl+Shift+Alt+R` で変更できます。作成済みの workspace は `Ctrl+Shift+O` のランチャーから選択できます。
+
+現在の workspace 名は、タブバー右端に `WS: workspace名` と表示されます。
 
 ## 入力待ち表示
 

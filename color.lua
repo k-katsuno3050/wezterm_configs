@@ -139,6 +139,7 @@ function module.apply_to_config(config)
 
   wezterm.on('update-right-status', function(window, pane)
     local domain = (pane:get_domain_name() or '')
+    local workspace = window:active_workspace()
     local is_ssh = (pane:get_user_vars().IS_SSH or '0') == '1'
     local proc = (pane:get_foreground_process_name() or ''):lower()
     local title = (pane:get_title() or ''):lower()
@@ -153,6 +154,8 @@ function module.apply_to_config(config)
     else
       window:set_config_overrides({ colors = wsl_colors, window_background_gradient = wsl_gradient })
     end
+
+    window:set_right_status(' WS: ' .. workspace .. ' ')
   end)
 end
 

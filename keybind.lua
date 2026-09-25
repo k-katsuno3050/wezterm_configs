@@ -100,16 +100,30 @@ function module.apply_to_config(config)
     { key = 'LeftArrow', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(-1) },
     { key = 'RightArrow', mods = 'CTRL|SHIFT', action = wezterm.action.MoveTabRelative(1) },
 
-    -- 【ランチャーを開く】Ctrl+Shift+O でシンプルなランチャーを表示
+    -- 【ランチャーを開く】Ctrl+Shift+O でメニューとワークスペースを表示
     {
       key = 'O',
       mods = 'CTRL|SHIFT',
       action = wezterm.action.ShowLauncherArgs {
-        flags = 'LAUNCH_MENU_ITEMS|FUZZY',
+        flags = 'LAUNCH_MENU_ITEMS|WORKSPACES|FUZZY',
       },
     },
 
-    -- 【プロジェクトランチャー】Ctrl+Shift+G でプロジェクトを選択してタブを開く
+    -- 【ワークスペース名変更】現在のワークスペース名を変更する
+    {
+      key = 'R',
+      mods = 'CTRL|SHIFT|ALT',
+      action = wezterm.action.PromptInputLine {
+        description = '新しいワークスペース名を入力',
+        action = wezterm.action_callback(function(_, _, line)
+          if line and line ~= '' then
+            wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
+          end
+        end),
+      },
+    },
+
+    -- 【プロジェクトランチャー】Ctrl+Shift+G で現在のワークスペースにプロジェクトタブを開く
     {
       key = 'G',
       mods = 'CTRL|SHIFT',
