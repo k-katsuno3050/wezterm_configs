@@ -32,6 +32,22 @@ function module.apply_to_config(config)
     -- 【スクロールバック検索】選択中の文字列、または空の検索欄で検索を開始
     { key = 'F', mods = 'CTRL|SHIFT', action = wezterm.action.Search 'CurrentSelectionOrEmptyString' },
 
+    -- 【Quick Select】URL以外の識別子を選択してクリップボードへコピー
+    {
+      key = 'Q',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action.QuickSelectArgs {
+        patterns = {
+          '~?/[[:alnum:]_.~/-]+',
+          '[A-Za-z]:\\\\[^\\s]+',
+          '\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b',
+          '\\b[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\\b',
+          '\\b[0-9a-fA-F]{7,40}\\b',
+          '\\b[[:alnum:]._%+-]+@[[:alnum:].-]+\\.[[:alpha:]]{2,}\\b',
+        },
+      },
+    },
+
     -- 【タブ操作】
     { key = 'W', mods = 'CTRL|SHIFT', action = wezterm.action.CloseCurrentTab { confirm = false } },
     { key = 'P', mods = 'CTRL|SHIFT', action = wezterm.action.SpawnCommandInNewTab { args = { 'powershell.exe' }, domain = { DomainName = 'local' } } },
