@@ -178,9 +178,11 @@ function module.apply_to_config(config)
     { key = 'k', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Up' },
     { key = 'j', mods = 'CTRL|SHIFT', action = wezterm.action.ActivatePaneDirection 'Down' },
 
-    -- 【ペインの横幅変更】Alt + 左右でアクティブペインの横幅を変更
-    { key = 'LeftArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Left', 5 } },
-    { key = 'RightArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Right', 5 } },
+    -- 【ペインのサイズ変更】Alt + 矢印でアクティブペインのサイズを変更
+    { key = 'LeftArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Left', 3 } },
+    { key = 'RightArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Right', 3 } },
+    { key = 'UpArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Up', 3 } },
+    { key = 'DownArrow', mods = 'ALT', action = wezterm.action.AdjustPaneSize { 'Down', 3 } },
 
     -- 【ペインの最大化】現在のペインを最大化、または元の分割表示に戻す
     { key = 'Z', mods = 'CTRL|SHIFT', action = wezterm.action.TogglePaneZoomState },
