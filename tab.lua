@@ -1,11 +1,25 @@
 local wezterm = require 'wezterm'
+local notify = require 'notify'
 local module = {}
+
+local function is_tab_waiting(tab)
+  for _, pane in ipairs(tab.panes) do
+    if notify.is_waiting(pane.pane_id) then
+      return true
+    end
+  end
+  return false
+end
 
 function module.apply_to_config(config)
   wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+    local waiting = is_tab_waiting(tab)
     local title = tab.tab_title
     if not title or #title == 0 then
       title = tab.active_pane.title
+    end
+    if waiting then
+      title = '! ' .. title
     end
     title = ' ' .. title .. ' '
 
@@ -46,6 +60,11 @@ function module.apply_to_config(config)
     elseif hover then
       bg = hover_bg
       fg = "#ffffff"
+    end
+
+    if waiting then
+      bg = "#f2c94c"
+      fg = "#241a00"
     end
 
     -- タブバー背景色（ドメイン別）

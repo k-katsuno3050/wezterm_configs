@@ -1,4 +1,5 @@
 local wezterm = require 'wezterm'
+local notify = require 'notify'
 local module = {}
 
 -- タブタイトルの末尾 (N) をインクリメント、なければ (1) を付加
@@ -14,6 +15,16 @@ end
 
 function module.apply_to_config(config)
   config.keys = {
+    -- 【入力待ち表示】Enterを送ったらアクティブペインの待機状態を解除
+    {
+      key = 'Enter',
+      mods = 'NONE',
+      action = wezterm.action_callback(function(window, pane)
+        notify.clear_waiting(pane)
+        window:perform_action(wezterm.action.SendKey { key = 'Enter' }, pane)
+      end),
+    },
+
     -- 【クリップボード】
     { key = 'V',      mods = 'CTRL|SHIFT', action = wezterm.action.PasteFrom 'Clipboard' },
     { key = 'Insert', mods = 'SHIFT',      action = wezterm.action.PasteFrom 'Clipboard' },
@@ -106,13 +117,18 @@ function module.apply_to_config(config)
         local projects = {
           { id = 'ANEGO/Front',  cwd = '~/top/crm/frontend' },
           { id = 'ANEGO/Back',  cwd = '~/top/crm/backend' },
+          { id = 'ANEGO/GCP',  cwd = '~/top/crm/gcp' },
           { id = 'Aqpina',       cwd = '~/top/aws_aqpina/code/back/laravel' },
-          { id = 'トップ名古屋', cwd = '~/top/aws_top-nagoya/code/back/laravel' },
-          { id = '履歴書/Front', cwd = '~/top/recruit_form/code/front/react' },
-          { id = '履歴書/Back',  cwd = '~/top/recruit_form/code/back/laravel' },
-          { id = 'でんき',       cwd = '~/top/denki' },
+          { id = 'top-nagoya', cwd = '~/top/aws_top-nagoya/code/back/laravel' },
+          { id = 'TOP-AUTH',       cwd = '~/top/top-auth' },
+          { id = 'recruit_form/Front', cwd = '~/top/recruit_form/code/front/react' },
+          { id = 'recruit_form/Back',  cwd = '~/top/recruit_form/code/back/laravel' },
+          { id = 'denki',       cwd = '~/top/denki' },
+          { id = 'TMS',       cwd = '~/top/tms/code ' },
+          { id = 'meibo',       cwd = '~/top/meibo/code/meibo ' },
           { id = 'NVIM',        cwd = '~/.config/nvim' },
           { id = 'Download',        cwd = '/mnt/c/Users/k-katsuno3050/Downloads' },
+          { id = 'temp',        cwd = '~/temp' },
         }
         local choices = {}
         for _, p in ipairs(projects) do
