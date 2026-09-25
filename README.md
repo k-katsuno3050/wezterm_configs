@@ -40,6 +40,8 @@ return index.apply()
 | `Ctrl+Shift+l` | 右のペインに移動 |
 | `Ctrl+Shift+k` | 上のペインに移動 |
 | `Ctrl+Shift+j` | 下のペインに移動 |
+| `Alt+←` | 現在のペインの横幅を左へ広げる |
+| `Alt+→` | 現在のペインの横幅を右へ広げる |
 | `Ctrl+Shift+Z` | 現在のペインを最大化／元の分割表示に戻す |
 | `Ctrl+Shift+Alt+D` | デバッグオーバーレイを表示 |
 
