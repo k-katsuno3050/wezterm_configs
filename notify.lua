@@ -10,6 +10,12 @@ function module.clear_waiting(pane)
   waiting_panes[pane:pane_id()] = nil
 end
 
+function module.clear_tab_waiting(tab)
+  for _, pane in ipairs(tab:panes()) do
+    waiting_panes[pane:pane_id()] = nil
+  end
+end
+
 function module.apply_to_config(config)
   -- ベル音を無効化（視覚・OS通知に置き換えるため）
   config.audible_bell = 'Disabled'

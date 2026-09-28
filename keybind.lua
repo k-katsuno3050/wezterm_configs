@@ -24,6 +24,16 @@ function module.apply_to_config(config)
         window:perform_action(wezterm.action.SendKey { key = 'Enter' }, pane)
       end),
     },
+    -- AIエージェント実行中など、Enterを送らずに現在のタブの待機表示を解除
+    {
+      key = 'I',
+      mods = 'CTRL|SHIFT',
+      action = wezterm.action_callback(function(window, _)
+        local tab = window:active_tab()
+        notify.clear_tab_waiting(tab)
+        tab:set_title(tab:get_title())
+      end),
+    },
 
     -- 【クリップボード】
     { key = 'V',      mods = 'CTRL|SHIFT', action = wezterm.action.PasteFrom 'Clipboard' },
