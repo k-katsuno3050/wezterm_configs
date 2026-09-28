@@ -128,6 +128,10 @@ function module.apply_to_config(config)
       },
     },
 
+    -- 【ワークスペース切替】Ctrl+[ / ] で辞書順に切り替える
+    { key = '[', mods = 'CTRL', action = wezterm.action.SwitchWorkspaceRelative(-1) },
+    { key = ']', mods = 'CTRL', action = wezterm.action.SwitchWorkspaceRelative(1) },
+
     -- 【ワークスペース名変更】現在のワークスペース名を変更する
     {
       key = 'R',
