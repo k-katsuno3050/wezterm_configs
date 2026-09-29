@@ -132,6 +132,17 @@ local ssh_gradient = {
   blend = 'Rgb',
 }
 
+local function apply_window_colors(window, colors, gradient)
+  local overrides = window:get_config_overrides() or {}
+  if overrides.colors and overrides.colors.background == colors.background then
+    return
+  end
+
+  overrides.colors = colors
+  overrides.window_background_gradient = gradient
+  window:set_config_overrides(overrides)
+end
+
 function module.apply_to_config(config)
   -- デフォルトは WSL カラーを適用
   config.colors = wsl_colors
@@ -148,11 +159,11 @@ function module.apply_to_config(config)
     local is_ssh_title = title:find('@ip%-') ~= nil or title:find('@%d+%.%d+') ~= nil
 
     if is_ssh or is_ssh_proc or is_ssh_title then
-      window:set_config_overrides({ colors = ssh_colors, window_background_gradient = ssh_gradient })
+      apply_window_colors(window, ssh_colors, ssh_gradient)
     elseif domain == 'local' then
-      window:set_config_overrides({ colors = ps_colors, window_background_gradient = ps_gradient })
+      apply_window_colors(window, ps_colors, ps_gradient)
     else
-      window:set_config_overrides({ colors = wsl_colors, window_background_gradient = wsl_gradient })
+      apply_window_colors(window, wsl_colors, wsl_gradient)
     end
 
     window:set_right_status(' WS: ' .. workspace .. ' ')
