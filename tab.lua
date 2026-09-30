@@ -66,8 +66,15 @@ function module.apply_to_config(config)
     end
 
     if waiting then
-      bg = "#f2c94c"
       fg = "#241a00"
+      if tab.is_active then
+        bg = "#f2c94c"
+      elseif hover then
+        bg = "#b39436"
+      else
+        bg = "#806a2a"
+        fg = "#fff2bd"
+      end
     end
 
     -- タブバー背景色（ドメイン別）
