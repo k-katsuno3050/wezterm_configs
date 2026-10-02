@@ -148,7 +148,8 @@ function module.apply_to_config(config)
   config.colors = wsl_colors
   config.window_background_gradient = wsl_gradient
 
-  wezterm.on('update-right-status', function(window, pane)
+  wezterm.on('update-status', function(window, _)
+    local pane = window:mux_window():active_pane()
     local domain = (pane:get_domain_name() or '')
     local workspace = window:active_workspace()
     local is_ssh = (pane:get_user_vars().IS_SSH or '0') == '1'
