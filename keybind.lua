@@ -15,6 +15,10 @@ end
 
 function module.apply_to_config(config)
   config.keys = {
+    -- 誤操作によるウィンドウの全画面化を防止
+    { key = 'Enter', mods = 'ALT', action = wezterm.action.DisableDefaultAssignment },
+    { key = 'F11', mods = 'NONE', action = wezterm.action.ToggleFullScreen },
+
     -- 【入力待ち表示】Enterを送ったらアクティブペインの待機状態を解除
     {
       key = 'Enter',
