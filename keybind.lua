@@ -1,5 +1,6 @@
 local wezterm = require 'wezterm'
 local notify = require 'notify'
+local projects = require 'projects'
 local module = {}
 
 -- タブタイトルの末尾 (N) をインクリメント、なければ (1) を付加
@@ -165,22 +166,6 @@ function module.apply_to_config(config)
       key = 'G',
       mods = 'CTRL|SHIFT',
       action = wezterm.action_callback(function(window, pane)
-        local projects = {
-          { id = 'ANEGO/Front',  cwd = '~/top/crm/frontend' },
-          { id = 'ANEGO/Back',  cwd = '~/top/crm/backend' },
-          { id = 'ANEGO/GCP',  cwd = '~/top/crm/gcp' },
-          { id = 'Aqpina',       cwd = '~/top/aws_aqpina/code/back/laravel' },
-          { id = 'top-nagoya', cwd = '~/top/aws_top-nagoya/code/back/laravel' },
-          { id = 'TOP-AUTH',       cwd = '~/top/top-auth' },
-          { id = 'recruit_form/Front', cwd = '~/top/recruit_form/code/front/react' },
-          { id = 'recruit_form/Back',  cwd = '~/top/recruit_form/code/back/laravel' },
-          { id = 'denki',       cwd = '~/top/denki' },
-          { id = 'TMS',       cwd = '~/top/tms/code' },
-          { id = 'meibo',       cwd = '~/top/meibo/code/meibo' },
-          { id = 'NVIM',        cwd = '~/.config/nvim' },
-          { id = 'Download',        cwd = '/mnt/c/Users/k-katsuno3050/Downloads' },
-          { id = 'temp',        cwd = '~/temp' },
-        }
         local choices = {}
         for _, p in ipairs(projects) do
           table.insert(choices, { label = p.id, id = p.id })
