@@ -9,7 +9,8 @@ function module.apply_to_config(config)
   config.use_fancy_tab_bar = false 
   config.tab_max_width = 20  -- 1つのタブの最大文字数を指定
   config.tab_bar_at_bottom = true
-  config.font_size = 11.0
+  config.font_size = 10.5
+  config.line_height = 1.15
   config.font = wezterm.font_with_fallback {
     'JetBrainsMono NF',    -- 英数字用（Nerd Font対応）
     'BIZ UDゴシック',
